@@ -29,6 +29,7 @@ export default function Home() {
     if (selectedSkill && selectedLevel && selectedDepth) {
       fetchTOC();
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedSkill, selectedLevel, selectedDepth]);
 
   const fetchTOC = async () => {
