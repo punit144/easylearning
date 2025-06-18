@@ -30,8 +30,10 @@ export default function Home() {
   const [contentLoading, setContentLoading] = useState(false);
 
   useEffect(() => {
-    if (selectedSkill && selectedLevel) fetchTOC();
+  if (selectedSkill && selectedLevel) fetchTOC();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedSkill, selectedLevel]);
+
 
   const fetchTOC = async () => {
     setLoading(true);
@@ -144,7 +146,13 @@ export default function Home() {
             <>
               <h3 className="text-2xl font-semibold mb-4 text-purple-700">{selectedTopic}</h3>
               <div className="bg-gray-900 text-white p-4 rounded-xl shadow-inner border border-purple-200 overflow-auto min-h-[300px] prose prose-invert prose-pre:bg-black prose-pre:text-white prose-pre:rounded-md">
-                <ReactMarkdown remarkPlugins={[remarkGfm, remarkHighlight]} rehypePlugins={[rehypeRaw]}>{sections[currentPage]}</ReactMarkdown>
+                <ReactMarkdown
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                  remarkPlugins={[remarkGfm, remarkHighlight] as any}
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                  rehypePlugins={[rehypeRaw] as any}
+                   >
+                  {sections[currentPage]}</ReactMarkdown>
               </div>
               <div className="flex justify-between mt-4">
                 <button className="bg-purple-200 text-purple-900 px-4 py-2 rounded shadow hover:bg-purple-300 disabled:opacity-50" disabled={currentPage === 0} onClick={() => setCurrentPage(prev => Math.max(0, prev - 1))}>⬅️ Prev</button>
